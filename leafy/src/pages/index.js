@@ -44,13 +44,16 @@ const IndexPage = () => {
       secondary: { label: 'Per 1 Million', value: commafy(stats?.testsPerOneMillion) }
     },
     { primary:   { label: 'Active Cases',   value: commafy(stats?.active) },
-  },
-  { primary:   { label: 'Critical Cases',  value: commafy(stats?.critical) },
-  },
-  { primary:   { label: 'Recovered Cases',   value: commafy(stats?.recovered) }
-  },
-    
-  ];
+      secondary: { label: 'Per 1 Million', value: commafy(stats?.activePerOneMillion) }
+    },
+    { primary:   { label: 'Critical Cases',  value: commafy(stats?.critical) },
+      secondary: { label: 'Per 1 Million', value: commafy(stats?.criticalPerOneMillion) }
+    },
+    { primary:   { label: 'Recovered Cases',   value: commafy(stats?.recovered) },
+      secondary: { label: 'Per 1 Million', value: commafy(stats?.recoveredPerOneMillion) }
+    },
+      
+    ];
 
   async function mapEffect(map) { 
     // if (!hasCountries) { 
