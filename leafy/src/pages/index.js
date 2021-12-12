@@ -24,6 +24,11 @@ const IndexPage = () => {
   const { data: countries = [] } = useTracker({
     api: 'countries'
   });
+  const { data: state = [] } = useTracker({
+    api: 'states'
+  });
+
+  console.log(useTracker({ api: 'states'}));
   const hasCountries = Array.isArray(countries) && countries.length > 0;
 
   console.log('@WILL -- warning: countries is null');
@@ -35,22 +40,22 @@ const IndexPage = () => {
   
   const dashboardStats = [
     { primary:   { label: 'Total Cases',   value: commafy(stats?.cases) },
-      secondary: { label: 'Per 1 Million', value: commafy(stats?.casesPerOneMillion) }
+      secondary: { label: 'Per 1 Million', value: (stats?.casesPerOneMillion) }
     },
     { primary:   { label: 'Total Deaths',  value: commafy(stats?.deaths) },
-      secondary: { label: 'Per 1 Million', value: commafy(stats?.deathsPerOneMillion) }
+      secondary: { label: 'Per 1 Million', value: (stats?.deathsPerOneMillion) }
     },
     { primary:   { label: 'Total Tests',   value: commafy(stats?.tests) },
-      secondary: { label: 'Per 1 Million', value: commafy(stats?.testsPerOneMillion) }
+      secondary: { label: 'Per 1 Million', value: (stats?.testsPerOneMillion) }
     },
     { primary:   { label: 'Active Cases',   value: commafy(stats?.active) },
-      secondary: { label: 'Per 1 Million', value: commafy(stats?.activePerOneMillion) }
+      secondary: { label: 'Per 1 Million', value: (stats?.activePerOneMillion) }
     },
     { primary:   { label: 'Critical Cases',  value: commafy(stats?.critical) },
-      secondary: { label: 'Per 1 Million', value: commafy(stats?.criticalPerOneMillion) }
+      secondary: { label: 'Per 1 Million', value: (stats?.criticalPerOneMillion) }
     },
     { primary:   { label: 'Recovered Cases',   value: commafy(stats?.recovered) },
-      secondary: { label: 'Per 1 Million', value: commafy(stats?.recoveredPerOneMillion) }
+      secondary: { label: 'Per 1 Million', value: (stats?.recoveredPerOneMillion) }
     },
       
     ];
@@ -112,7 +117,7 @@ const IndexPage = () => {
           updated,
           cases,
           deaths,
-          recovered
+          recovered,
         } = properties
     
         casesString = `${cases}`;

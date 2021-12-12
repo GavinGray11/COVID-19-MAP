@@ -4,17 +4,22 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 
-const API_HOST = 'https://corona.lmao.ninja/v2';
+//const API_HOST = 'https://corona.lmao.ninja/v2';
+const API_HOST = 'https://disease.sh/v3/covid-19/';
 
 const ENDPOINTS = [
   {
     id: 'all',
-    path: '/all',
+    path: 'all',
     isDefault: true
   },
   {
     id: 'countries',
-    path: '/countries'
+    path: 'countries'
+  },
+  {
+    id: 'states',
+    path: 'states'
   }
 ]
 
