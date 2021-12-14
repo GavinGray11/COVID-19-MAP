@@ -24,11 +24,13 @@ const IndexPage = () => {
   const { data: countries = [] } = useTracker({
     api: 'countries'
   });
-  const { data: state = [] } = useTracker({
+  const { data: states = [] } = useTracker({
     api: 'states'
   });
 
-  console.log(useTracker({ api: 'states'}));
+
+  // console.log(useTracker({ api: 'states'}));
+  // console.log(useTracker(states?.));
   const hasCountries = Array.isArray(countries) && countries.length > 0;
 
   console.log('@WILL -- warning: countries is null');
@@ -70,12 +72,15 @@ const IndexPage = () => {
     console.log('MapEffect automatically called, calling axios.get()');
 
     try { 
-      response = await axios.get('https://corona.lmao.ninja/v2/countries');
+      // https://disease.sh/v3/covid-19/
+      response = await axios.get('https://disease.sh/v3/covid-19/countries');
+      // response = await axios.get('https://corona.lmao.ninja/v2/countries');
     } catch(e) { 
       console.log('Failed to fetch countries: ${e.message}', e);
       return;
     }
 
+    console.log(response);
     // const { countries = [] } = response;  // part 2
     // console.log(countries);
     const { data = [] } = response;   // part 1
@@ -105,6 +110,103 @@ const IndexPage = () => {
         }
       })
     }
+
+    let countiesResponse;
+
+    try { 
+      // https://disease.sh/v3/covid-19/
+      countiesResponse = await axios.get('https://disease.sh/v3/covid-19/jhucsse/counties');
+      // console.log( await axios.get('https://disease.sh/v3/covid-19/jhucsse/counties'));
+      // response = await axios.get('https://corona.lmao.ninja/v2/countries');
+    } catch(e) { 
+      console.log('Failed to fetch countries: ${e.message}', e);
+      return;
+    }
+
+    console.log(countiesResponse.data);
+    let countiesData = countiesResponse.data;
+    console.log("Printing countiesData");
+    console.log(countiesData);
+
+    var data_filter = countiesData.filter( element => (element.coordinates.latitude && element.coordinates.longitude) && (element.coordinates.latitude != "" || element.coordinates.longitude != ""))
+    console.log("Printing data_filter");
+    console.log(data_filter)
+
+    countiesData = data_filter
+
+    const geoCountiesJson = {
+      type: 'FeatureCollection',
+      // features: countries.map((country = {}) => {    // part 2
+      features: countiesData.map((county = {}) => {      // part 1
+        const { coordinates = {} } = county;
+        const { latitude, longitude } = coordinates;
+        return {
+          type: 'Feature',
+          properties: {
+            ...county,
+            ...county.stats,
+          },
+          geometry: {
+            type: 'Point',
+    
+            coordinates: [ parseFloat(longitude), parseFloat(latitude) ]
+          }
+        }
+      })
+    }
+
+    console.log(geoCountiesJson)
+
+    const geoCountiesJsonLayers = new L.GeoJSON(geoCountiesJson, {
+      pointToLayer: (feature = {}, latlng) => {
+        const { properties = {} } = feature;
+        let updatedFormatted;
+        let casesString;
+    
+        const {
+          confirmed,
+          country,
+          county,
+          deaths,
+          province,
+          recovered,
+          updatedAt,
+        } = properties
+    
+        casesString = `${confirmed}`;
+    
+        if ( confirmed > 1000 ) {
+          casesString = `${casesString.slice(0, -3)}k+`
+        }
+    
+        if ( updatedAt ) {
+          updatedFormatted = new Date(updatedAt).toLocaleString();
+        }
+    
+        const html = `
+          <span class="icon-marker">
+            <span class="icon-marker-tooltip">
+              <h2>${county}, ${province}</h2>
+              <ul>
+                <li><strong>Confirmed:</strong> ${confirmed}</li>
+                <li><strong>Deaths:</strong> ${deaths}</li>
+                <li><strong>Recovered:</strong> ${recovered}</li>
+                <li><strong>Last Update:</strong> ${updatedFormatted}</li>
+              </ul>
+            </span>
+            ${ casesString }
+          </span>
+        `;
+      
+        return L.marker( latlng, {
+          icon: L.divIcon({
+            className: 'icon',
+            html
+          }),
+          riseOnHover: true
+        });
+      }
+    });
 
     const geoJsonLayers = new L.GeoJSON(geoJson, {
       pointToLayer: (feature = {}, latlng) => {
@@ -158,6 +260,7 @@ const IndexPage = () => {
     console.log(geoJson);
 
     geoJsonLayers.addTo(map);
+    geoCountiesJsonLayers.addTo(map)
   };
 
   const mapSettings = {
