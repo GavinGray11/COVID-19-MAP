@@ -2,13 +2,12 @@ header {
 
   width: 100%;
   color: $white;
-  background-color: $gatsby-purple;
+  background-image: linear-gradient(to bottom, rgb(56, 60, 80) , rgb(23, 25, 35));
+  background-color: rgb(35, 35, 66);
 
   .container {
     display: flex;
-    justify-content: space-between;
-    height: 2.5em;
-    line-height: 2.5em;
+    justify-content: center;
   }
 
   ul,
@@ -32,9 +31,19 @@ header {
   }
 
   p {
-    font-size: 1.2em;
+    font-family: bomberescortcondital;
+    letter-spacing: 3px;
+    font-size: 4em;
     font-weight: bold;
     margin: 0;
+    text-align: center;
+    margin: 5px;
+    color: rgb(244, 242, 255);
+    
+
   }
 
+  
 }
+
+

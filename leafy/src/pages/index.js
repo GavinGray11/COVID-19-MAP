@@ -12,6 +12,11 @@ import Container from "components/Container";
 import Map from "components/Map";
 import Snippet from "components/Snippet";
 
+import TableData from "../components/TableData";
+import TableDataCountry from "../components/TableDataCountry";
+import TableDataCountryP from "../components/TableDataCountryP";
+import ChartCounty from "../components/ChartCounty";
+
 const LOCATION = {
   lat: 34.0522,
   lng: -118.2437,
@@ -260,7 +265,7 @@ const IndexPage = () => {
     console.log(geoJson);
 
     geoJsonLayers.addTo(map);
-    geoCountiesJsonLayers.addTo(map)
+    //geoCountiesJsonLayers.addTo(map)
   };
 
   const mapSettings = {
@@ -273,11 +278,14 @@ const IndexPage = () => {
   return (
     <Layout pageName="home">
       <Helmet>
-        <title>Home Page</title>
+        <title>Immaculate Covid Tracker</title>
       </Helmet>
-
+      <div>
+      <ChartCounty/>
+    </div>
     <div className="tracker">
-      <Map {...mapSettings} />
+      <div className="map-adj"><Map {...mapSettings} /></div>
+      
       <div className="tracker-stats">
         <ul>
           { dashboardStats.map(({ primary = {}, secondary = {} }, i ) => {
@@ -305,10 +313,18 @@ const IndexPage = () => {
     <p>Last Updated: { stats ? friendlyDate( stats?.updated ) : '-' } </p>
   </div>
 
-  <Container type="content" className="text-center home-start"> 
+  {/* <Container type="content" className="text-center home-start"> 
     <h3>It has  covid stats via markers on our map, and stas shown in a dashboard... lots of fun!</h3>
-    </Container>
+    </Container> */}
+    
+    <div className="table-wrap">
+    <TableData/>
+    <TableDataCountry/>
+    <TableDataCountryP/>
+    </div>
+    
   </Layout>
+  
   );
 };
 

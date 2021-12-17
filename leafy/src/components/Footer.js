@@ -11,8 +11,8 @@ const Footer = () => {
     <footer>
       <Container>
         <p>
-          &copy; {new Date().getFullYear()},{" "}
-          <a href={authorUrl}>{authorName}</a>
+          {new Date().getFullYear()} {" "}
+          IMMACULATE COVID TRACKER
         </p>
       </Container>
     </footer>

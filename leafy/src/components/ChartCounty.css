@@ -1,0 +1,23 @@
+.chart {
+    width: 650px;
+    border: 3px solid rgb(59, 59, 94);
+    border-radius: 25px;
+}
+
+.half {
+    width: 300px;
+    border: 3px solid rgb(59, 59, 94);
+    border-radius: 25px;
+}
+
+.chart-container{
+    display: flex;
+    justify-content: space-evenly;
+    height: 300px;
+    
+}
+
+@font-face {
+    font-family: bomberescortcondital;
+    src: url('../assets/font/bomberescortcondital.ttf');
+  }
