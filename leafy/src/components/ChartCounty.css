@@ -1,0 +1,57 @@
+.chart {
+    width: 650px;
+    height: 350px;
+    border: 3px solid rgb(59, 59, 94);
+    border-radius: 25px;
+}
+
+.half {
+    width: 300px;
+    height: 350px;
+    border: 3px solid rgb(59, 59, 94);
+    border-radius: 25px;
+}
+
+.chart-container{
+    display: flex;
+    justify-content: space-evenly;
+    height: 300px;
+    
+}
+
+@font-face {
+    font-family: bomberescortcondital;
+    src: url('../assets/font/bomberescortcondital.ttf');
+  }
+
+
+  
+
+button {
+    position: relative;
+    margin-top: 200;
+    margin: 0 auto;
+    top: 60px;
+    width: 180px;
+    height: 40px;
+    font-size: 15px;
+    background-color: rgb(77, 92, 156);
+    border-radius: 25px;
+    border: 3px solid rgb(59, 51, 82);
+    color: rgb(185, 185, 194);
+    transition: 0.7s;
+    
+}
+
+button:hover {
+    background-color: rgb(54, 63, 107);
+    transform: scale(1.03)
+}
+
+button:active {
+    background-color: rgb(40, 46, 77);
+}
+
+#map2 {
+    display: none;
+}

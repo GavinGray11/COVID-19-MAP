@@ -1,8 +1,14 @@
 .page-home {
-
+  .map-adj {
+    width: 180vh;
+    margin: 70px auto;
+    border: 1px solid black;
+    border-radius: 25px;
+  }
   .map,
   .map-base {
-    height: 50vh;
+    height: 70vh;
+    border-radius: 25px;
   }
 
   main {
@@ -78,3 +84,63 @@
   }
 
 }
+
+.fle-wrap {
+  display: flex;
+}
+
+.table-wrap {
+  display: flex;
+  justify-content: center;
+  color: rgb(247, 250, 252);
+  
+  table {
+    width: 500px;
+  }
+
+  td, th {
+    border: 1px solid rgb(35, 38, 53);
+    background-color: rgb(49, 54, 80);
+    padding: 0.5rem;
+    transition: 0.7s;
+  }
+  td:hover {
+    background-color: rgb(71, 78, 116);
+  }
+  table, p {
+    border-collapse: collapse;
+    margin: 0px 20px;
+  
+  }
+  input {
+    width: 500px;
+    height: 40px;
+    text-align: center;
+    font-size: 17px;
+    background-color: rgb(90, 100, 141);
+    border-radius: 3px;
+    border: 4px solid rgb(46, 50, 73);
+    color: rgb(191, 188, 204);
+    margin: 10px 0px 10px 20px;
+    transition: 0.7s;
+  }
+  input:hover {
+    background-color: rgb(113, 127, 184);
+  }
+  ::placeholder {
+    color: rgb(167, 168, 173);
+  }
+  p {
+    text-align: center;
+    margin: 3px;
+    font-size: 40px;
+  }
+  
+
+}
+
+.toggle {
+  display: flex;
+  align-items: center;
+}
+

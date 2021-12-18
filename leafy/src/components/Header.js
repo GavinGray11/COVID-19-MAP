@@ -11,22 +11,11 @@ const Header = () => {
 
   return (
     <header>
-      <Container type="content">
-        <p>
-          <Link to="/">{companyName}</Link>
-        </p>
-        <ul>
-          <li>
-            <Link to="/about/">About</Link>
-          </li>
-          <li>
-            <a href={companyUrl}>
-              <span className="visually-hidden">Github</span>
-              <FaGithub />
-            </a>
-          </li>
-        </ul>
-      </Container>
+      <div className="container">
+      <p>IMMACULATE COVID TRACKER</p>
+      {/* <FaGithub /> */}
+      </div>
+      
     </header>
   );
 };
