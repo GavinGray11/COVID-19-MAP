@@ -55,3 +55,38 @@ button:active {
 #map2 {
     display: none;
 }
+
+.link-wrap {
+    display: flex;
+    justify-content: center;
+    margin: 15px auto;
+    background-color: rgb(51, 50, 88);
+    width: 750px;
+    padding: 10px;
+    border-radius: 25px;
+    
+    
+}
+
+.link-wrap > a {
+    color: white;
+    margin: 10px 50px;
+}
+
+.author-wrap {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 10px auto;
+    background-color: rgb(51, 50, 88);
+    width: 200px;
+    padding: 10px;
+    border-radius: 25px;
+
+    
+}
+
+.author-wrap > p {
+    color: white;
+    margin: 0px;
+}

@@ -349,6 +349,18 @@ const IndexPage = () => {
     <TableDataCountry/>
     <TableDataCountryP/>
     </div>
+    <div className="link-wrap">
+      <a href="https://disease.sh/docs/">DISEASE.SH API WEBSITE</a>
+      <a href="https://disease.sh/v3/covid-19/countries">COUNTRY API</a>
+      <a href="https://disease.sh/v3/covid-19/jhucsse/counties">COUNTY API</a>
+    </div>
+    <div className="author-wrap">
+      <p>Website created by:</p>
+      <p>Gavin Gray</p>
+      <p>Prston Fawcett</p>
+      <p>Isaac Estrada</p>
+      <p>Eric Corona</p>
+    </div>
   </Layout>
   
   );
