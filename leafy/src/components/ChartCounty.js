@@ -47,10 +47,10 @@ class ChartCounty extends Component {
           return;
         }
     
-        console.log(countiesResponse.data);
+        //console.log(countiesResponse.data);
         let countiesData = countiesResponse.data;
-        console.log("Printing WITHIN CLASS countiesData");
-        console.log(countiesData)
+        //console.log("Printing WITHIN CLASS countiesData");
+        //console.log(countiesData)
     
         var data_filter = countiesData.filter( element => (element.province === this.state.chosenState && element.stats.confirmed != 0));
 
@@ -58,7 +58,7 @@ class ChartCounty extends Component {
           return b.stats.confirmed - a.stats.confirmed;
         });
 
-        console.log(data_filter);
+        //console.log(data_filter);
         //this.setState({countyData: countiesData});
         
   
@@ -78,151 +78,223 @@ class ChartCounty extends Component {
         this.setState({countyTable: table});
     }
     render() {
+
+      const countryLabels = ["USA", "India", "Brazil", "UK", "Russia", "Turkey", "France", "Germany", "Iran", "Spain"]
+      const countryCases = [51541346,34732592,22209020,11190354,10159389,9136565,8518840,6755232,6167650,5455527]
+      //const countryPop = [332475723, 	1393409038, 213993437, 68207116, 145912025, 85042738, 65426179, 83900473, 85028759, 46745216]
+      const chartData = {
+        labels: countryLabels,
+        datasets: [{
+          label: "Top 10 Country Cases",
+          backgroundColor: ["#0074D9", "#FF4136", "#2ECC40", "#FF851B", "#7FDBFF","#0074D9", "#FF4136", "#2ECC40", "#FF851B", "#7FDBFF"],
+          borderWidth: 1,
+          hoverBackgroundColor: "rgb(232,105,90)",
+          hoverBorderColor: "orange",
+          scaleStepWidth: 1,
+          data: countryCases
+        },]
+      }
+      const chartOptions = {
+        plugins: {  // 'legend' now within object 'plugins {}'
+          title: {
+            display: true,
+            text: 'Top 10 Country Cases',
+            color: 'white',
+          },
+          legend: {
+            display: false,
+            labels: {
+              color: "white",  // not 'fontColor:' anymore
+              // fontSize: 18  // not 'fontSize:' anymore
+              font: {
+                size: 18 // 'size' now within object 'font {}'
+              }
+            }
+          }
+        },
+        scales: {
+          y: {  // not 'yAxes: [{' anymore (not an array anymore)
+            ticks: {
+              color: "white", // not 'fontColor:' anymore
+              // fontSize: 18,
+              font: {
+                size: 18, // 'size' now within object 'font {}'
+              },
+              stepSize: 1,
+              beginAtZero: true
+            },
+            grid: {
+              color: "rgb(159,170,174,0.5)"
+            },
+          },
+          x: {  // not 'xAxes: [{' anymore (not an array anymore)
+            ticks: {
+              color: "white",  // not 'fontColor:' anymore
+              //fontSize: 14,
+              font: {
+                size: 14 // 'size' now within object 'font {}'
+              },
+              stepSize: 1,
+              beginAtZero: true
+            },
+            grid: {
+              color: "rgb(159,170,174,0.5)"
+            },
+          }
+        }
+      }
+
+      const lineCases = [16,26930,33670,21970,57340,50794,33332,65353,108456,204544,291630,115363,67282,64136,73090,29031,16565,27077,22894,191475,98602,84844,58141]
+      const lineLabels = ['Mar 2020','Apr 2020','May 2020','Jun 2020','Jul 2020','Aug 2020','Sep 2020','Oct 2020','Nov 2020','Dec 2020',
+      'Jan 2021','Feb 2021','Mar 2021','May 2021','Jun 2021','Jul 2021','Aug 2021','Sep 2021','Oct 2021','Nov 2021','Dec 2021']
+      const lineData = {
+        labels:lineLabels,
+        datasets:[{
+            // responsive: false,
+            // maintainAspectRatio: false,
+            data: lineCases,
+            fill: false,
+            borderColor: 'rgb(75, 192, 192)',
+            tension: 0.3,
+            borderWidth: 5,
+        }]
+    }
+
+    const lineOptions = {
+      plugins: {  // 'legend' now within object 'plugins {}'
+        title: {
+          display: true,
+          text: 'US Cases Over Time (Mar 2020 - Dec 2021)',
+          color: 'white',
+        },
+        legend: {
+          display: false,
+          labels: {
+            color: "white",  // not 'fontColor:' anymore
+            // fontSize: 18  // not 'fontSize:' anymore
+            font: {
+              size: 18 // 'size' now within object 'font {}'
+            }
+          }
+        }
+      },
+      scales: {
+        y: {  // not 'yAxes: [{' anymore (not an array anymore)
+          ticks: {
+            color: "white", // not 'fontColor:' anymore
+            // fontSize: 18,
+            font: {
+              size: 18, // 'size' now within object 'font {}'
+            },
+            stepSize: 1,
+            beginAtZero: true
+          },
+          grid: {
+            color: "rgb(159,170,174,0.5)"
+          },
+        },
+        x: {  // not 'xAxes: [{' anymore (not an array anymore)
+          ticks: {
+            color: "white",  // not 'fontColor:' anymore
+            //fontSize: 14,
+            font: {
+              size: 14 // 'size' now within object 'font {}'
+            },
+            stepSize: 1,
+            beginAtZero: true
+          },
+          grid: {
+            color: "rgb(159,170,174,0.5)"
+          },
+        }
+      }
+    }
+
+    const pieLabels = ['California', 'Texas', 'Florida', 'New York', 'Illinois']
+    const pieCases = [52496854, 44845174, 37485951, 29456741, 19764183]
+    const pieData = {
+      labels:pieLabels,
+      datasets:[{
+          label:'Chart title',
+          data:pieCases,
+          backgroundColor: ["#0074D9", "#FF4136", "#2ECC40", "#FF851B", "#7FDBFF"],
+          font: 'white',
+          fontColor: 'white',
+          borderColor: 'white',
+      },
+    ]
+  }
+
+  const pieOptions = {
+    plugins: {  // 'legend' now within object 'plugins {}'
+      title: {
+        display: true,
+        text: 'Top 5 US State Cases',
+        color: 'white',
+      },
+      legend: {
+        labels: {
+          color: "white",  // not 'fontColor:' anymore
+          // fontSize: 18  // not 'fontSize:' anymore
+          font: {
+            size: 15 // 'size' now within object 'font {}'
+          }
+        }
+      }
+    },
+    scales: {
+      y: {  // not 'yAxes: [{' anymore (not an array anymore)
+        ticks: {
+          display: false,
+          color: "white", // not 'fontColor:' anymore
+          // fontSize: 18,
+          font: {
+            size: 18, // 'size' now within object 'font {}'
+          },
+          beginAtZero: false
+        },
+      },
+      x: {  // not 'xAxes: [{' anymore (not an array anymore)
+        ticks: {
+          display: false,
+          color: "white",  // not 'fontColor:' anymore
+          //fontSize: 14,
+          font: {
+            size: 14 // 'size' now within object 'font {}'
+          },
+          stepSize: 1,
+          beginAtZero: true
+        },
+      }
+    }
+  }
+
+
+
+
       return (
         <div>
-            CHART DATA
+            {/* CHART DATA
             <input
                 type="text"
                 id="state-search"
                 placeholder="Search state counties"
                 name="s"
                 onChange={e => this.onTodoChange(e.target.value)}
-            />
-            {/* <Pie
-        data={{
-          labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
-          datasets: [
-            {
-              label: '# of votes',
-              data: [12, 19, 3, 5, 2, 3],
-              backgroundColor: [
-                'rgba(255, 99, 132, 0.2)',
-                'rgba(54, 162, 235, 0.2)',
-                'rgba(255, 206, 86, 0.2)',
-                'rgba(75, 192, 192, 0.2)',
-                'rgba(153, 102, 255, 0.2)',
-                'rgba(255, 159, 64, 0.2)',
-              ],
-              borderColor: [
-                'rgba(255, 99, 132, 1)',
-                'rgba(54, 162, 235, 1)',
-                'rgba(255, 206, 86, 1)',
-                'rgba(75, 192, 192, 1)',
-                'rgba(153, 102, 255, 1)',
-                'rgba(255, 159, 64, 1)',
-              ],
-              borderWidth: 1,
-            },
-            // {
-            //   label: 'Quantity',
-            //   data: [47, 52, 67, 58, 9, 50],
-            //   backgroundColor: 'orange',
-            //   borderColor: 'red',
-            // },
-          ],
-        }}
-        height={400}
-        width={600}
-        options={{
-          maintainAspectRatio: false,
-          scales: {
-            yAxes: [
-              {
-                ticks: {
-                  beginAtZero: true,
-                },
-              },
-            ],
-          },
-          legend: {
-            labels: {
-              fontSize: 25,
-            },
-          },
-        }}
-      /> */}
-
-        {/* <div>
-        <canvas id="myChart"></canvas>
-        </div> */}
+            /> */}
         <div class="chart-container">
         <div class='chart'>
-        <Bar
-            data={{
-                labels:['Jan','Feb','Mar'],
-                datasets:[{
-                    label:'Chart title',
-                    data:[100,200,300],
-                    backgroundColor: 'red',
-                }]
-            }}
-            options={{
-                scales:{
-                    yAxes:[
-                        {
-                            labelString:'Revenue',
-                            display:true,
-                            fontColor:'blue',
-                            fontSize:20,
-                            ticks:{
-                                beginAtZero:true
-                            }
-                        }
-                    ]
-                }
-            }}
-        />
+          <Bar data={chartData} options={chartOptions}/>
         </div>
         <div class='half'>
         <Pie
-            data={{
-                labels:['Jan','Feb','Mar'],
-                datasets:[{
-                    label:'Chart title',
-                    data:[100,200,300],
-                    backgroundColor: 'red',
-                }]
-            }}
-            options={{
-                scales:{
-                    yAxes:[
-                        {
-                            ticks:{
-                                beginAtZero:true
-                            }
-                        }
-                    ]
-                }
-            }}
+            data={pieData}
+            options={pieOptions}
         />
         </div>
         
         <div class='chart'>
-        <Line
-            data={{
-                labels:['Jan','Feb','Mar','April','May','June','July'],
-                datasets:[{
-                    // responsive: false,
-                    // maintainAspectRatio: false,
-                    label: 'My First Dataset',
-                    data: [65, 59, 80, 81, 56, 55, 40],
-                    fill: false,
-                    borderColor: 'rgb(75, 192, 192)',
-                    tension: 0.1
-                }]
-            }}
-            options={{
-                scales:{
-                    yAxes:[
-                        {
-                            ticks:{
-                                beginAtZero:true
-                            }
-                        }
-                    ]
-                }
-            }}
-        />
+          <Line data={lineData} options={lineOptions}/>
         </div>
         
         

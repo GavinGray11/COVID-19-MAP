@@ -37,18 +37,18 @@ class TableData extends Component {
           return;
         }
     
-        console.log(countiesResponse.data);
+        //console.log(countiesResponse.data);
         let countiesData = countiesResponse.data;
-        console.log("Printing WITHIN CLASS countiesData");
-        console.log(countiesData)
+        //console.log("Printing WITHIN CLASS countiesData");
+        //console.log(countiesData)
     
-        var data_filter = countiesData.filter( element => (element.province === this.state.chosenState && element.stats.confirmed != 0));
+        var data_filter = countiesData.filter( element => (element.province.toLowerCase() === this.state.chosenState.toLowerCase() && element.stats.confirmed != 0));
 
         data_filter.sort((a, b) => {
           return b.stats.confirmed - a.stats.confirmed;
         });
 
-        console.log(data_filter);
+        //console.log(data_filter);
         //this.setState({countyData: countiesData});
         
   

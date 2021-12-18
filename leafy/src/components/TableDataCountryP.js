@@ -34,13 +34,13 @@ class TableDataCountryP extends Component {
           return;
         }
     
-        console.log(countryResponse.data);
+        //console.log(countryResponse.data);
         let countryData = countryResponse.data;
-        console.log("Printing WITHIN CLASS countiesData");
-        console.log(countryData)
+        //console.log("Printing WITHIN CLASS countiesData");
+        //console.log(countryData)
     
         var data_filter = countryData.filter( element => (true));
-        console.log(data_filter);
+        //console.log(data_filter);
         data_filter.sort((a, b) => {
             return b.casesPerOneMillion - a.casesPerOneMillion;
           });
